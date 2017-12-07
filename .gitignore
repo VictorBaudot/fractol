@@ -1,0 +1,8 @@
+*
+!*.c
+!*.h
+!Makefile
+!auteur
+!.gitignore
+!libft
+!minilibx
