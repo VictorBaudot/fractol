@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   draw_mandelbrot.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:50:34 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/07 18:35:07 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/08 09:51:23 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	draw(t_data data)
+void	draw_mandelbrot(t_data data)
 {
 	// on définit la zone que l'on dessine. Ici, la fractale en entière
 	double x1 = -2.1;
-	// double x2 = 0.6;
+	double x2 = 0.6;
 	double y1 = -1.2;
-	// double y2 = 1.2;
-	double zoom = 100; // pour une distance de 1 sur le plan, on a 100 pixel sur l'image
-	double iteration_max = 50;
+	double y2 = 1.2;
+	double zoom = 1;
+	double iteration_max = 100;
 
 	// on calcule la taille de l'image :
-	// double image_x = (x2 - x1) * zoom;
-	// double image_y = (y2 - y1) * zoom;
+	double image_x = (x2 - x1) * zoom;
+	double image_y = (y2 - y1) * zoom;
 
 	int x;
 	int y;
 
 	x = 0;
-	while (x < data.win_width)
+	while (x < image_x)
 	{
 		y = 0;
-		while (y < data.win_height)
+		while (y < image_y)
 		{
 			double c_r = x / zoom + x1;
 			double c_i = y / zoom + y1;
@@ -54,4 +54,5 @@ void	draw(t_data data)
 		}
 		x++;
 	}
+    mlx_put_image_to_window(data.mlx, data.win, data.img.img_ptr, 0, 0);
 }

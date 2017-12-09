@@ -6,7 +6,7 @@
 #    By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 08:32:05 by vbaudot           #+#    #+#              #
-#    Updated: 2017/12/07 17:53:00 by vbaudot          ###   ########.fr        #
+#    Updated: 2017/12/09 16:31:42 by vbaudot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,11 @@ SRC = main.c\
 		print_usage.c\
 		fractol.c\
 		events.c\
-		draw.c\
+		draw_julia.c\
+		draw_mandelbrot.c\
 
 OBJ = $(SRC:.c=.o)
-MLX = -L./libft -lmlx -lft -framework OpenGL -framework Appkit
+MLX = -L./minilibx_macos -lmlx -L./libft -lft -framework OpenGL -framework Appkit
 DEBUG = -g -fsanitize=address
 CFLAGS = -Wall -Werror -Wextra
 LIBFT = libft.a
@@ -46,18 +47,18 @@ $(NAME): $(OBJ)
 
 %.o: %.c
 	@printf "\r\033[0K[$(NAME)] compile $(BOL)$(YEL)$<$(NC)..."
-	@$(CC) $(CFLAGS) -I./libft -I./minilibx -c $<
+	@$(CC) $(CFLAGS) -I./libft -I./minilibx_macos -c $<
 	@printf '\t'$(OK)
 
 clean:
-	@make -C minilibx clean
+	@make -C minilibx_macos clean
 	@make -C libft clean
 	@printf "[$(NAME)] rm all $(BOL)$(RED) obj file$(NC)"
 	@rm -rf $(OBJ) libmlx.a
 	@printf '\t\t'$(OK)'\n'
 
 fclean: clean
-	@make -C minilibx clean
+	@make -C minilibx_macos clean
 	@make -C libft fclean
 	@printf "[$(NAME)] rm $(BOL)$(CYA)$(NAME)$(NC)"
 	@rm -rf $(NAME)

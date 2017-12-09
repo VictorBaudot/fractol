@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:58:46 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/07 17:51:20 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/09 17:23:45 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,14 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
+# include <pthread.h>
 # include "libft.h"
+
+typedef struct	s_julia
+{
+	double		cRe;
+	double		cIm;
+}				t_julia;
 
 typedef struct	s_img
 {
@@ -37,14 +44,18 @@ typedef struct	s_data
 {
 	void		*mlx;
 	void		*win;
+	t_julia		julia;
 	t_img		img;
 	int			win_width;
 	int			win_height;
 }				t_data;
 
-void			draw(t_data data);
+void			draw_julia(t_data data);
+void			draw_mandelbrot(t_data data);
+int				mouse_move(int x, int y, t_data *data);
+int				my_mouse_funct(int button, int x, int y, t_data *data);
 int				my_key_funct(int keycode, t_data *data);
-int				fractol();
+int				fractol(char *fractale);
 void			ft_error(void);
 void			print_usage(void);
 
