@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:58:46 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/09 17:23:45 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/10 17:03:55 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,15 @@ typedef struct	s_data
 	t_img		img;
 	int			win_width;
 	int			win_height;
+	int 		i;
+	double		zoom;
+	double		moveX;
+	double		moveY;
 }				t_data;
 
-void			draw_julia(t_data data);
+void			*draw_julia(void *data);
 void			draw_mandelbrot(t_data data);
+int				mouse_wheel(int x, int y, t_data data);
 int				mouse_move(int x, int y, t_data *data);
 int				my_mouse_funct(int button, int x, int y, t_data *data);
 int				my_key_funct(int keycode, t_data *data);
