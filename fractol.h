@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:58:46 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/12 12:50:07 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/12 14:00:25 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ typedef struct	s_fractales
 }				t_fractals;
 
 void			*draw_julia(void *data);
-void			*draw_newton(void *data);
+void			*draw_burning_ship(void *d);
+void			*draw_drake_frontier(void *d);
 void			*draw_mandelbrot(void *data);
 int				mouse_wheel(int x, int y, t_data data);
 int				mouse_move(int x, int y, t_data *data);

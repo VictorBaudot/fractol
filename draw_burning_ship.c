@@ -6,13 +6,13 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 11:58:46 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/12 11:59:02 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/12 13:41:56 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	*draw_newton(void *d)
+void	*draw_burning_ship(void *d)
 {
 	double newRe, newIm, oldRe, oldIm;
 	int maxIterations = 256;
@@ -29,14 +29,14 @@ void	*draw_newton(void *d)
 		x = 0;
 		while (x < data->win_width)
 		{
-			pr = 1.5 * (x - data->win_width / 2) / (0.5 * data->zoom * data->win_width) + data->moveX - 0.5;
-			pi = (y - data->win_height / 2) / (0.5 * data->zoom * data->win_height) + data->moveY;
+			pr = 1.5 * (x - data->win_width / 2) / (0.5 * (data->zoom / 1.2) * data->win_width) + data->moveX - 0.5;
+			pi = (y - data->win_height / 2) / (0.5 * (data->zoom / 1.2) * data->win_height) + data->moveY - 0.5;
 			newRe = newIm = oldRe = oldIm = 0;
 			i = 0;
 			while (i < maxIterations)
 			{
-				oldRe = newRe;
-				oldIm = newIm;
+				oldRe = fabs(newRe);
+				oldIm = fabs(newIm);
 				newRe = oldRe * oldRe - oldIm * oldIm + pr;
 				newIm = 2 * oldRe * oldIm + pi;
 				if ((newRe * newRe + newIm * newIm) > 4)

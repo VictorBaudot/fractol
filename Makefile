@@ -6,7 +6,7 @@
 #    By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 08:32:05 by vbaudot           #+#    #+#              #
-#    Updated: 2017/12/12 12:59:38 by vbaudot          ###   ########.fr        #
+#    Updated: 2017/12/12 14:01:30 by vbaudot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,9 @@ SRC = main.c\
 		fractol.c\
 		events.c\
 		draw_julia.c\
-		draw_newton.c\
+		draw_burning_ship.c\
 		draw_mandelbrot.c\
+		draw_drake_frontier.c\
 
 OBJ = $(SRC:.c=.o)
 MLX = -L./minilibx_macos -lmlx -L./libft -lft -framework OpenGL -framework Appkit
