@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 14:00:46 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/12 08:46:39 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/12 13:20:31 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	mouse_move(int x, int y, t_data *data)
 			data->julia.cIm = 0.27015 - (y - data->win_height / 2) * 0.0001;
 		else
 			data->julia.cIm = 0.27015 + (y - data->win_height / 2) * 0.0001;
-		draw_julia(data);
+		data->f(data);
 		mlx_string_put(data->mlx, data->win, 30, 50, 0, "x:");
 		mlx_string_put(data->mlx, data->win, 50, 50, 0, ft_itoa(x));
 		mlx_string_put(data->mlx, data->win, 30, 100, 0, "y:");
@@ -85,13 +85,13 @@ int	my_key_funct(int keycode, t_data *data)
 	}
 	data->pause = (keycode == 35) ? ((data->pause == 0) ? 1 : 0) : data->pause;
 	if (keycode == 69)// +
-		data->zoom += 0.2;
+		data->zoom *= 1.2;
 	if (keycode == 78)// -
-		data->zoom -= 0.2;
+		data->zoom /= 1.2;
 	if (keycode == 67)// *
-		data->zoom += 10;
+		data->zoom *= 10;
 	if (keycode == 75)// /
-		data->zoom -= 10;
+		data->zoom /= 10;
 	if (keycode == 123)// Left
 		data->moveX -= 0.2 / data->zoom;
 	if (keycode == 124)// Right
@@ -100,6 +100,7 @@ int	my_key_funct(int keycode, t_data *data)
 		data->moveY -= 0.2 / data->zoom;
 	if (keycode == 125)// Down
 		data->moveY += 0.2 / data->zoom;
-	draw_julia(data);
+	//(ft_strcmp(data->fractale, "Mandelbrot") == 0) ? draw_mandelbrot(data) : draw_julia(data);
+	data->f(data);
 	return (0);
 }

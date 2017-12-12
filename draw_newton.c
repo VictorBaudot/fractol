@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_mandelbrot.c                                  :+:      :+:    :+:   */
+/*   draw_newton.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/07 17:50:34 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/12 11:55:42 by vbaudot          ###   ########.fr       */
+/*   Created: 2017/12/12 11:58:46 by vbaudot           #+#    #+#             */
+/*   Updated: 2017/12/12 11:59:02 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	*draw_mandelbrot(void *d)
+void	*draw_newton(void *d)
 {
 	double newRe, newIm, oldRe, oldIm;
 	int maxIterations = 256;

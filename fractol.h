@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:58:46 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/12 08:30:46 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/12 12:50:07 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,24 @@ typedef struct	s_data
 	double		moveX;
 	double		moveY;
 	int			pause;
+	char		*fractal;
+	void		*(*f)(void *);
 }				t_data;
 
+typedef struct	s_fractales
+{
+	char		*fractal;
+	void		*(*f)(void *);
+}				t_fractals;
+
 void			*draw_julia(void *data);
-void			draw_mandelbrot(t_data data);
+void			*draw_newton(void *data);
+void			*draw_mandelbrot(void *data);
 int				mouse_wheel(int x, int y, t_data data);
 int				mouse_move(int x, int y, t_data *data);
 int				my_mouse_funct(int button, int x, int y, t_data *data);
 int				my_key_funct(int keycode, t_data *data);
-int				fractol(char *fractale);
+int				fractol(char *fractal, void *(*f)(void *));
 void			ft_error(void);
 void			print_usage(void);
 

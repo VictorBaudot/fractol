@@ -6,7 +6,7 @@
 #    By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 08:32:05 by vbaudot           #+#    #+#              #
-#    Updated: 2017/12/09 16:31:42 by vbaudot          ###   ########.fr        #
+#    Updated: 2017/12/12 12:59:38 by vbaudot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,12 @@ SRC = main.c\
 		fractol.c\
 		events.c\
 		draw_julia.c\
+		draw_newton.c\
 		draw_mandelbrot.c\
 
 OBJ = $(SRC:.c=.o)
 MLX = -L./minilibx_macos -lmlx -L./libft -lft -framework OpenGL -framework Appkit
-DEBUG = -g -fsanitize=address
+DEBUG = -g3 -fsanitize=address
 CFLAGS = -Wall -Werror -Wextra
 LIBFT = libft.a
 
@@ -42,7 +43,7 @@ $(NAME): $(OBJ)
 	@make -C libft
 	@printf "\n[$(NAME)] linking $(CYA)$(BOL)$(OBJ)$(NC)\n"
 	@printf "to make the binary $(MAG)$(BOL)$(NAME)$(NC)"
-	@gcc $(CFLAGS) $(MLX) $(OBJ) -o $(NAME)
+	@gcc $(CFLAGS) $(MLX) $(OBJ) $(DEBUG) -o $(NAME)
 	@printf '\t\t'$(OK)'\n'
 
 %.o: %.c

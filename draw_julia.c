@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:50:34 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/10 17:18:01 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/12 09:10:19 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	*draw_julia(void *d)
 			}
 			//use color model conversion to get rainbow palette, make brightness black if maxIterations reached
 			color = ((255 - 2.5 * i) >= 0) ? (int)(255 - 2.5 * i) : 256;
-			//printf("%d ", color);
 			//draw the pixel
 			data->img.data[y * data->win_width + x] = color;
 		x++;
