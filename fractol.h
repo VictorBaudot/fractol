@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:58:46 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/10 17:03:55 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/12 08:30:46 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct	s_data
 	double		zoom;
 	double		moveX;
 	double		moveY;
+	int			pause;
 }				t_data;
 
 void			*draw_julia(void *data);

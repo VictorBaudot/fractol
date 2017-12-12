@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 13:43:03 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/10 17:31:41 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/12 08:45:26 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static t_data	init_data(t_data data)
 	data.zoom = 1;
 	data.moveX = 0;
 	data.moveY = 0;
+	data.pause = 0;
 	return (data);
 }
 
@@ -41,7 +42,8 @@ int				fractol(char *fractale)
 	(ft_strcmp(fractale, "Mandelbrot") == 0) ? draw_mandelbrot(data) : draw_julia(&data);
 	mlx_key_hook(data.win, my_key_funct, &data);
 	mlx_mouse_hook(data.win, my_mouse_funct, &data);
-	mlx_hook(data.win, 6, 6, mouse_move, &data);
+	if (ft_strcmp(fractale, "Julia") == 0)
+		mlx_hook(data.win, 6, 6, mouse_move, &data);
 	mlx_loop(data.mlx);
 	mlx_destroy_image(data.mlx, data.img.img_ptr);
 	mlx_destroy_window(data.mlx, data.win);
