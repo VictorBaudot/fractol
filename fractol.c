@@ -6,13 +6,13 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 13:43:03 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/12 14:03:38 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/22 11:46:42 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	init_data(t_data *data, char *fractal, void	*(*f)(void *))
+static void	init_data(t_data *data, char *fractal, void *f(void *))
 {
 	data->win_width = 800;
 	data->win_height = 600;
@@ -27,7 +27,7 @@ static void	init_data(t_data *data, char *fractal, void	*(*f)(void *))
 	data->f = f;
 }
 
-int				fractol(char *fractal, void	*(*f)(void *))
+int			fractol(char *fractal, void *f(void *))
 {
 	t_data	data;
 
@@ -40,7 +40,6 @@ int				fractol(char *fractal, void	*(*f)(void *))
 	data.img.img_ptr = mlx_new_image(data.mlx, data.win_width, data.win_height);
 	data.img.data = (int *)mlx_get_data_addr(data.img.img_ptr, &data.img.bpp,
 		&data.img.size_l, &data.img.endian);
-	//(ft_strcmp(fractal, "Mandelbrot") == 0) ? draw_mandelbrot(&data) : data.f(&data);
 	data.f(&data);
 	mlx_key_hook(data.win, my_key_funct, &data);
 	mlx_mouse_hook(data.win, my_mouse_funct, &data);

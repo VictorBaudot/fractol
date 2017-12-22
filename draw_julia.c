@@ -6,61 +6,56 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:50:34 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/12 14:18:24 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/22 11:59:36 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	*draw_julia(void *d)
+static void	algo_julia(int max_iterations, int x, int y, t_data *data)
 {
-	//each iteration, it calculates: new = old*old + c, where c is a constant and old starts at current pixel
-//	double cRe, cIm;           //real and imaginary part of the constant c, determinate shape of the Julia Set
-	double newRe, newIm, oldRe, oldIm;   //real and imaginary parts of new and old
-	int maxIterations = 100; //after how much iterations the function should stop
-	int color;
-	int x;
-	int y;
-	int i;
-	t_data *data = d;
+	double	tab[4];
+	int		color;
+	int		i;
+
+	tab[0] = 1.5 * (x - data->win_width / 2) /
+	(0.5 * data->zoom * data->win_width) + data->moveX;
+	tab[1] = (y - data->win_height / 2) /
+	(0.5 * data->zoom * data->win_height) + data->moveY;
+	i = 0;
+	while (i < max_iterations)
+	{
+		tab[2] = tab[0];
+		tab[3] = tab[1];
+		tab[0] = tab[2] * tab[2] - tab[3] * tab[3] + data->julia.cRe;
+		tab[1] = 2 * tab[2] * tab[3] + data->julia.cIm;
+		if ((tab[0] * tab[0] + tab[1] * tab[1]) > 4)
+			break ;
+		i++;
+	}
+	color = ((255 - 2.5 * i) >= 0) ? (int)(255 - 2.5 * i) : 256;
+	data->img.data[y * data->win_width + x] = color;
+	x++;
+}
+
+void		*draw_julia(void *d)
+{
+	int		x;
+	int		y;
+	t_data	*data;
 
 	y = 0;
-	//pick some values for the constant c, this determines the shape of the Julia Set
-	//cRe = data->julia.cRe;
-	//cIm = data->julia.cIm;
-	//loop through every pixel
+	data = d;
 	while (y < data->win_height)
 	{
 		x = 0;
 		while (x < data->win_width)
 		{
-			newRe = 1.5 * (x - data->win_width / 2) / (0.5 * data->zoom * data->win_width) + data->moveX;
-			newIm = (y - data->win_height / 2) / (0.5 * data->zoom * data->win_height) + data->moveY;
-			//i will represent the number of iterations
-			//start the iteration process
-			i = 0;
-			while (i < maxIterations)
-			{
-				//remember value of previous iteration
-				oldRe = newRe;
-				oldIm = newIm;
-				//the actual iteration, the real and imaginary part are calculated
-				newRe = oldRe * oldRe - oldIm * oldIm + data->julia.cRe;
-				newIm = 2 * oldRe * oldIm + data->julia.cIm;
-				//if the point is outside the circle with radius 2: stop
-				if ((newRe * newRe + newIm * newIm) > 4)
-					break;
-				i++;
-			}
-			//use color model conversion to get rainbow palette, make brightness black if maxIterations reached
-			color = ((255 - 2.5 * i) >= 0) ? (int)(255 - 2.5 * i) : 256;
-			//draw the pixel
-			data->img.data[y * data->win_width + x] = color;
-		x++;
-	  }
-	  y++;
-  }
-  mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
- // mlx_string_put(data->mlx, data->win, 50, 50, 0, ft_itoa(data->julia.cRe));
- return (0);
+			algo_julia(100, x, y, data);
+			x++;
+		}
+		y++;
+	}
+	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
+	return (0);
 }
