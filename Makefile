@@ -6,7 +6,7 @@
 #    By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 08:32:05 by vbaudot           #+#    #+#              #
-#    Updated: 2017/12/27 14:39:46 by vbaudot          ###   ########.fr        #
+#    Updated: 2017/12/27 15:00:06 by vbaudot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ SRC = main.c\
 		draw_burning_ship.c\
 		draw_mandelbrot.c\
 		color.c\
-		print_infos.c\
 
 OBJ = $(SRC:.c=.o)
 MLX = -L./minilibx_macos -lmlx -L./libft -lft -framework OpenGL -framework Appkit

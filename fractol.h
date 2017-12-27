@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:58:46 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/27 14:51:37 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/27 15:00:11 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ typedef struct	s_fractales
 }				t_fractals;
 
 int				f_destroy(t_data *data);
-void			print_infos(t_data *data);
 int				get_color(int i, int zn);
 void			*draw_julia(void *data);
 void			*draw_burning_ship(void *d);

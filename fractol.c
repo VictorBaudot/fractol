@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 13:43:03 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/27 14:42:52 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/27 14:59:58 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int			fractol(char *fractal, void *f(void *))
 	data.img.data = (int *)mlx_get_data_addr(data.img.img_ptr, &data.img.bpp,
 		&data.img.size_l, &data.img.endian);
 	data.f(&data);
-	print_infos(&data);
 	mlx_hook(data.win, 17, 1L << 17, f_destroy, &data);
 	mlx_key_hook(data.win, my_key_funct, &data);
 	mlx_mouse_hook(data.win, my_mouse_funct, &data);

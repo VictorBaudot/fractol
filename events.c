@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 14:00:46 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/27 14:51:17 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/27 14:59:54 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	mouse_move(int x, int y, t_data *data)
 		else
 			data->julia.cim = 0.27015 + (y - data->win_height / 2) * 0.0001;
 		data->f(data);
-		print_infos(data);
 	}
 	return (0);
 }
@@ -46,7 +45,6 @@ int	my_mouse_funct(int button, int x, int y, t_data *data)
 	if (button == 5)
 		data->zoom /= 1.1;
 	data->f(data);
-	print_infos(data);
 	return (0);
 }
 
@@ -73,6 +71,5 @@ int	my_key_funct(int keycode, t_data *data)
 	if (keycode == 125)
 		data->movey += 0.2 / data->zoom;
 	data->f(data);
-	print_infos(data);
 	return (0);
 }
