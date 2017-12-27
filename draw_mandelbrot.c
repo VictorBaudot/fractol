@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:50:34 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/22 12:50:53 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/27 14:34:37 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@ static void	algo_mandelbrot(int max_iterations, t_data *data, int x, int y)
 {
 	double	tab[6];
 	int		i;
-	int		color;
 
 	tab[4] = 1.5 * (x - data->win_width / 2) /
-	(0.5 * data->zoom * data->win_width) + data->moveX - 0.5;
+	(0.5 * data->zoom * data->win_width) + data->movex - 0.5;
 	tab[5] = (y - data->win_height / 2) /
-	(0.5 * data->zoom * data->win_height) + data->moveY;
+	(0.5 * data->zoom * data->win_height) + data->movey;
 	i = -1;
 	while (++i < 4)
 		tab[i] = 0;
@@ -36,11 +35,11 @@ static void	algo_mandelbrot(int max_iterations, t_data *data, int x, int y)
 			break ;
 		i++;
 	}
-	color = ((255 - 2.5 * i) >= 0) ? (int)(255 - 2.5 * i) : 256;
-	data->img.data[y * data->win_width + x] = color;
+	data->img.data[y * data->win_width + x] = get_color(i, sqrt(tab[0] * tab[0]
+		+ tab[1] * tab[1]));
 }
 
-void	*draw_mandelbrot(void *d)
+void		*draw_mandelbrot(void *d)
 {
 	int		x;
 	int		y;
@@ -53,7 +52,7 @@ void	*draw_mandelbrot(void *d)
 		x = 0;
 		while (x < data->win_width)
 		{
-			algo_mandelbrot(256, data, x, y);
+			algo_mandelbrot(data->i_max, data, x, y);
 			x++;
 		}
 		y++;

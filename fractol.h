@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:58:46 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/22 11:13:53 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/27 14:51:37 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,15 @@
 
 typedef struct	s_julia
 {
-	double		cRe;
-	double		cIm;
+	double		cre;
+	double		cim;
 }				t_julia;
+
+union			u_color
+{
+	unsigned int	number;
+	unsigned char	channels[4];
+};
 
 typedef struct	s_img
 {
@@ -48,10 +54,11 @@ typedef struct	s_data
 	t_img		img;
 	int			win_width;
 	int			win_height;
-	int 		i;
+	int			i;
+	int			i_max;
 	double		zoom;
-	double		moveX;
-	double		moveY;
+	double		movex;
+	double		movey;
 	int			pause;
 	char		*fractal;
 	void		*(*f)(void *);
@@ -63,6 +70,9 @@ typedef struct	s_fractales
 	void		*(*f)(void *);
 }				t_fractals;
 
+int				f_destroy(t_data *data);
+void			print_infos(t_data *data);
+int				get_color(int i, int zn);
 void			*draw_julia(void *data);
 void			*draw_burning_ship(void *d);
 void			*draw_mandelbrot(void *data);

@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 13:43:03 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/22 11:46:42 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/27 14:42:52 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ static void	init_data(t_data *data, char *fractal, void *f(void *))
 {
 	data->win_width = 800;
 	data->win_height = 600;
-	data->julia.cRe = -0.7;
-	data->julia.cIm = 0.27015;
+	data->julia.cre = -0.7;
+	data->julia.cim = 0.27015;
 	data->i = 0;
+	data->i_max = 90;
 	data->zoom = 1;
-	data->moveX = 0;
-	data->moveY = 0;
+	data->movex = 0;
+	data->movey = 0;
 	data->pause = 0;
 	data->fractal = fractal;
 	data->f = f;
@@ -41,6 +42,8 @@ int			fractol(char *fractal, void *f(void *))
 	data.img.data = (int *)mlx_get_data_addr(data.img.img_ptr, &data.img.bpp,
 		&data.img.size_l, &data.img.endian);
 	data.f(&data);
+	print_infos(&data);
+	mlx_hook(data.win, 17, 1L << 17, f_destroy, &data);
 	mlx_key_hook(data.win, my_key_funct, &data);
 	mlx_mouse_hook(data.win, my_mouse_funct, &data);
 	if (ft_strcmp(fractal, "Julia") == 0)
