@@ -6,3 +6,6 @@
 !.gitignore
 !libft
 !minilibx_macos
+!*.pdf
+!README*
+
